@@ -13,8 +13,7 @@ public class Entreprise {
 
     //Méthodes de la classe Entreprise
     public static Double primeAnnuelleBase() {
-        Double prime = LocalDate.now().getYear() * 0.5 ;
 
-        return prime;
+        return LocalDate.now().getYear()/2d;
     }
 }
