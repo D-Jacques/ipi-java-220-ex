@@ -106,16 +106,21 @@ public class Employe{
         return Objects.hash(nom, prenom, matricule, dateEmbauche, salaire);
     }
 
-    public double augmenterSalaire(Double poucentage){
+    /*
+    * Augmentation du salaire selon un pourcentage donné
+    * Ex : salaire a 500, pourcentage à 0.5 => nouveau salaire a 750;
+    *
+    * @param pourcentage pourcentage est non null et strictement positif
+    */
+    public void augmenterSalaire(Double poucentage){
         this.salaire = this.salaire + (this.salaire * poucentage);
 
-        return this.getSalaire();
     }
 
-    public double getPrimeAnuelle(){
-        Double primeAnuelle = Entreprise.primeAnnuelleBase();
+    public Double getPrimeAnnuelle(){
+        Double primeAnnuelle = Entreprise.primeAnnuelleBase();
 
-        return primeAnuelle;
+        return primeAnnuelle;
     }
 
     public Employe(){
