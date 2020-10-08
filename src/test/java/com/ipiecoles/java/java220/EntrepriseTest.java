@@ -154,6 +154,7 @@ public class EntrepriseTest {
 		TestUtils.checkMethod("Employe", "setSalaire", "void", TestUtils.DOUBLE);
 
 		Derived d = new Derived();
+		//Return 1 Janvier 1970
 		LocalDate dateTime = new LocalDate();
 		TestUtils.invokeSetter(d, "nom", "nom");
 		TestUtils.invokeSetter(d, "prenom", "prenom");

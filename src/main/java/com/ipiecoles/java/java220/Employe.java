@@ -1,11 +1,14 @@
 package com.ipiecoles.java.java220;
 
+import org.joda.time.DateTimeUtils;
 import org.joda.time.LocalDate;
+
+import java.util.Objects;
 
 /**
  * Created by pjvilloud on 21/09/17.
  */
-public class Employe {
+public class Employe{
     private String nom;
     private String prenom;
     private String matricule;
@@ -45,6 +48,10 @@ public class Employe {
         return -1;
     }
 
+    public Integer getNbConges(){
+        return Entreprise.NB_CONGES_BASE;
+    }
+
     //SETTERS
 
     public void setNom(String nom){
@@ -59,12 +66,56 @@ public class Employe {
         this.matricule = matricule;
     }
 
-    public void setDateEmbauche(LocalDate dateEmbauche){
-        this.dateEmbauche = dateEmbauche;
+    public void setDateEmbauche(LocalDate dateEmbauche) throws Exception {
+        LocalDate dateNow = LocalDate.now();
+        if(dateEmbauche != null && dateEmbauche.isAfter(dateNow)){
+            throw new Exception("La date d'embauche ne peut être postérieure à la date courante");
+        }
+        else{
+            this.dateEmbauche = dateEmbauche;
+        }
     }
 
     public void setSalaire(Double salaire){
         this.salaire = salaire;
+    }
+
+    @Override
+    public String toString(){
+        return "Employe{nom='"+this.nom+"', prenom='"+this.prenom+"', matricule='"+this.matricule+"', dateEmbauche="+this.dateEmbauche+", salaire="+this.salaire+"}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        //Si on compare notre employé avec lui même ou une variable qui contient sa référence, on renvois true
+        if (this == o) return true;
+        //Si l'objet envoyé est null ou qu'on à envoyé un objet de classe différente, on renvois false
+        if (o == null || getClass() != o.getClass()) return false;
+        //Sinon on cast l'objet en tant qu'Employe
+        Employe employe = (Employe) o;
+        //On retourne en comparant chaque attributs
+        return Objects.equals(nom, employe.nom) &&
+                Objects.equals(prenom, employe.prenom) &&
+                Objects.equals(matricule, employe.matricule) &&
+                Objects.equals(dateEmbauche, employe.dateEmbauche) &&
+                Objects.equals(salaire, employe.salaire);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nom, prenom, matricule, dateEmbauche, salaire);
+    }
+
+    public double augmenterSalaire(Double poucentage){
+        this.salaire = this.salaire + (this.salaire * poucentage);
+
+        return this.getSalaire();
+    }
+
+    public double getPrimeAnuelle(){
+        Double primeAnuelle = Entreprise.primeAnnuelleBase();
+
+        return primeAnuelle;
     }
 
     public Employe(){

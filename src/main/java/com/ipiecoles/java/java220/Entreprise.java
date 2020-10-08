@@ -16,4 +16,5 @@ public class Entreprise {
 
         return LocalDate.now().getYear()/2d;
     }
+
 }
