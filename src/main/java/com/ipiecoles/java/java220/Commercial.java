@@ -64,5 +64,11 @@ public class Commercial extends Employe {
         return Objects.hash(super.hashCode(), caAnnuel, performance);
     }
 
-
+    @Override
+    public String toString() {
+        return "Commercial{" +
+                "performance=" + performance +
+                ", caAnnuel=" + caAnnuel +
+                '}';
+    }
 }

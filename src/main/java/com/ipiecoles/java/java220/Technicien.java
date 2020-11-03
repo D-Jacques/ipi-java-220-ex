@@ -2,6 +2,8 @@ package com.ipiecoles.java.java220;
 
 import org.joda.time.LocalDate;
 
+import java.util.Objects;
+
 public class Technicien extends Employe{
 
     private Integer grade;
@@ -41,6 +43,22 @@ public class Technicien extends Employe{
     public Double getPrimeAnnuelle(){
         //la prime annuelle de base est la prime anuelle de base que l'on multiplie par la bonification en fonction du grade
         //On ajoute la prime d'anciennetée de l'entreprise multiplié par le nombre d'année d'ancienneté du technicien
-        return super.getPrimeAnnuelle() * (1+(grade/10d)) + Entreprise.PRIME_ANCIENNETE * this.getNombreAnneeAnciennete();
+        Double primeAnnuelle = Entreprise.primeAnnuelleBase();
+
+        return primeAnnuelle * (1+(grade/10d)) + Entreprise.PRIME_ANCIENNETE * this.getNombreAnneeAnciennete();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Technicien that = (Technicien) o;
+        return Objects.equals(grade, that.grade);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), grade);
     }
 }
